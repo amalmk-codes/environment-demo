@@ -1,205 +1,530 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Environmental Awareness — Pro Demo</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Module 2 — Environmental Ethics & Sustainability</title>
+<link rel="preconnect" href="https://images.unsplash.com">
 <style>
-:root{
-  --bg:#f6fbf8;
-  --card:#ffffff;
-  --accent:#2b8a6b;
-  --muted:#555;
-  --shadow: 0 6px 18px rgba(43,138,107,0.12);
-  font-family: "Segoe UI", Roboto, Arial, sans-serif;
-}
-body{background:var(--bg); margin:0; color:#112; line-height:1.5;}
-.wrap{max-width:900px;margin:28px auto;padding:18px;}
-header{display:flex;align-items:center;gap:12px;}
-.logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#1f6f54);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;box-shadow:var(--shadow);}
-h1{margin:0;font-size:22px;}
-p.lead{color:var(--muted);margin-top:6px;}
-.grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:16px;}
-@media(min-width:820px){.grid{grid-template-columns:1fr 320px;}}
-.card{background:var(--card);padding:14px;border-radius:10px;box-shadow:var(--shadow);}
-section h2{margin:0 0 8px 0;font-size:16px;color:var(--accent);}
-.small{font-size:13px;color:var(--muted);}
-ul{margin:8px 0 0 18px;padding:0;}
-.quiz-btn{display:inline-block;margin:6px 6px 0 0;padding:6px 10px;border-radius:8px;border:1px solid #e6f2ec;background:#fff;cursor:pointer;}
-.quiz-btn.correct{background:#6ee7b7;border-color:#34d399;}
-.quiz-btn.wrong{background:#fecaca;border-color:#f87171;}
-.result{margin-top:10px;font-weight:700;}
-.small-note{font-size:12px;color:#666;margin-top:8px;}
-.puzzle-input{width:100%;padding:8px;margin-top:6px;border-radius:6px;border:1px solid #ddd;}
-footer{margin-top:12px;text-align:center;color:#666;font-size:13px;}
-.present-tips{background:#fbfffc;border-left:4px solid var(--accent);padding:8px;border-radius:6px;margin-top:8px;}
-.btn{background:var(--accent);color:#fff;padding:8px 10px;border-radius:8px;border:none;cursor:pointer;}
+  :root{
+    --bg1:#5b2cff; --bg2:#1fb6ff;
+    --card:#ffffff; --muted:#6b7280; --accent:#7c3aed;
+    --glass: rgba(255,255,255,0.06);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; color:#0b1220; background:linear-gradient(135deg,var(--bg1),var(--bg2)); min-height:100vh;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  }
+  .site{max-width:1100px;margin:20px auto;padding:20px;}
+  header.hero{
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    border-radius:14px; padding:22px; color:white; box-shadow:0 10px 30px rgba(10,10,20,0.18);
+    display:flex; gap:18px; align-items:center;
+  }
+  .logo{
+    width:74px;height:74px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:22px;background:linear-gradient(135deg,#fff6, #ffffff20);
+    color:#fff;border:1px solid rgba(255,255,255,0.12);
+  }
+  .hero h1{margin:0;font-size:22px;letter-spacing:0.2px}
+  .hero p{margin:6px 0 0;color: #e6f7ff; opacity:0.95}
+  .cta-row{margin-left:auto;display:flex;gap:10px;align-items:center}
+  .btn{
+    background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.14);
+    color:#fff;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600;
+  }
+  .btn.primary{background:linear-gradient(90deg,#7c3aed,#3dd6ff);box-shadow:0 8px 26px rgba(60,50,150,0.18);border:none}
+  .grid{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px}
+  @media(max-width:900px){ .grid{grid-template-columns:1fr} .cta-row{margin-left:0} .hero{flex-direction:column;align-items:flex-start} }
+
+  /* Content cards */
+  .card{background:rgba(255,255,255,0.98);border-radius:12px;padding:16px;box-shadow:0 12px 30px rgba(9,10,25,0.06)}
+  .section-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+  @media(max-width:820px){ .section-grid{grid-template-columns:1fr} }
+
+  .topic-card{
+    border-radius:12px;overflow:hidden;display:flex;flex-direction:column;height:100%;
+    transition:transform .22s ease, box-shadow .22s ease;
+  }
+  .topic-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(12,18,60,0.12)}
+  .topic-media{height:120px;background:#eee;background-size:cover;background-position:center}
+  .topic-body{padding:12px}
+  .topic-body h3{margin:0;font-size:16px}
+  .topic-body p{margin:8px 0 0;color:var(--muted);font-size:14px}
+
+  /* Accordion */
+  .accordion{margin-top:12px}
+  .acc-item{border-radius:8px;margin-bottom:8px;overflow:hidden;border:1px solid rgba(15,23,42,0.04)}
+  .acc-title{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:linear-gradient(0deg, rgba(0,0,0,0.02), rgba(0,0,0,0));cursor:pointer}
+  .acc-title h4{margin:0;font-size:15px}
+  .acc-body{padding:12px;border-top:1px solid rgba(0,0,0,0.03);display:none;background:linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4))}
+
+  /* Right column */
+  aside .card{position:sticky;top:20px}
+  .small{font-size:13px;color:var(--muted)}
+
+  /* Games styles */
+  .games-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:560px){.games-row{grid-template-columns:1fr}}
+  .game{background:linear-gradient(180deg,#fff,#fbfdff);padding:12px;border-radius:10px;box-shadow:0 10px 24px rgba(12,20,50,0.05)}
+  .q-row{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+  .pill{background:#f1f5f9;padding:8px 10px;border-radius:999px;font-weight:600;color:#0b1220;border:1px solid #eee;cursor:pointer}
+  .pill.true{background:linear-gradient(90deg,#dffcf2,#e7fffa);border:1px solid #b9f0da}
+  .pill.false{background:linear-gradient(90deg,#fff1f2,#ffecec);border:1px solid #f5c6c8}
+  .result{margin-top:8px;font-weight:700}
+
+  input.puzzle{width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;margin-top:8px}
+  .btn.small{padding:8px 10px;font-size:14px;border-radius:8px}
+  .memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .card-mem{background:#fff;border-radius:8px;height:60px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:700;box-shadow:0 8px 20px rgba(20,30,60,0.04)}
+  @media(max-width:560px){.memory-grid{grid-template-columns:repeat(3,1fr)} .card-mem{height:54px}}
+
+  footer{margin-top:18px;text-align:center;color:#eaf6ff;font-size:13px}
+  .image-credit{font-size:12px;color:rgba(255,255,255,0.9);margin-top:8px}
+  .badge{font-size:12px;background:rgba(255,255,255,0.06);padding:6px 8px;border-radius:8px;color:#fff;margin-right:8px}
+  .present-tips{margin-top:12px;background:rgba(255,255,255,0.06);padding:10px;border-radius:8px;color:#eaf6ff;font-size:13px}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-<div class="logo">EA</div>
-<div>
-<h1>Environmental Awareness — Pro Demo</h1>
-<p class="lead">Interactive classroom website: Ethics, Sustainability, Biodiversity & Urban Ecology</p>
-</div>
-</header>
+  <div class="site">
+    <header class="hero">
+      <div class="logo">M2</div>
+      <div class="hero-txt">
+        <h1>Module 2 — Environmental Ethics & Sustainability</h1>
+        <p>Explore ethics, sustainability, biodiversity and urban ecology with images, details and interactive games.</p>
+        <div class="image-credit">Images: Unsplash (free)</div>
+      </div>
+      <div class="cta-row">
+        <button class="btn primary" onclick="scrollToSection('topics')">Start Learning & Games</button>
+        <button class="btn" onclick="toggleTheme()">Preview</button>
+      </div>
+    </header>
 
-<div class="grid">
-<!-- Left column -->
-<div>
-<section class="card">
-<h2>1. Environmental Ethics</h2>
-<p class="small">Definition:</p>
-<p>Study of how humans should relate morally to nature. Guides decisions affecting animals, plants, ecosystems, and future generations.</p>
-<p class="small">Key theories:</p>
-<ul>
-<li><strong>Anthropocentrism:</strong> humans are central; nature is for people.</li>
-<li><strong>Biocentrism:</strong> all living beings have value.</li>
-<li><strong>Ecocentrism:</strong> ecosystems/nature as a whole have value.</li>
-</ul>
-</section>
+    <div class="grid" id="topics">
+      <!-- MAIN column -->
+      <main>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="flex:1">
+              <h2 style="margin:0">Welcome to Module 2 — Interactive App</h2>
+              <p class="small">Click a section to open detailed content. Use the games area to test your knowledge.</p>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span class="badge">🌱 Ethics</span>
+              <span class="badge">⚙️ Engineering</span>
+              <span class="badge">🌳 Biodiversity</span>
+              <span class="badge">🏙️ Urban Ecology</span>
+            </div>
+          </div>
 
-<section class="card" style="margin-top:12px">
-<h2>2. Sustainable Engineering</h2>
-<p class="small">Definition:</p>
-<p>Design and build solutions that meet present needs while protecting future resources.</p>
-<p class="small">Core concepts:</p>
-<ul>
-<li><strong>Triple Bottom Line:</strong> economic, social, environmental sustainability.</li>
-<li><strong>Life Cycle Analysis:</strong> check impacts from production to disposal.</li>
-<li>Metrics: carbon footprint, water footprint, energy use.</li>
-</ul>
-</section>
+          <div class="section-grid" style="margin-top:14px">
+            <!-- Environmental Ethics card -->
+            <div class="topic-card card" onclick="openAccordion('ethics')" role="button" style="cursor:pointer">
+              <div class="topic-media" style="background-image:url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=60')"></div>
+              <div class="topic-body">
+                <h3>Environmental Ethics</h3>
+                <p>Definition, importance, history and key philosophical theories (Anthropocentrism, Biocentrism, Ecocentrism).</p>
+              </div>
+            </div>
 
-<section class="card" style="margin-top:12px">
-<h2>3. Ecosystems & Biodiversity</h2>
-<p class="small">Basics:</p>
-<ul>
-<li>Ecosystem = community of organisms + environment.</li>
-<li>Biodiversity = variety of life; provides food, medicine, resilience.</li>
-<li>Human impacts: deforestation, pollution, urban sprawl → biodiversity loss.</li>
-<li><strong>Kerala examples:</strong> Western Ghats forests, mangroves, backwaters.</li>
-</ul>
-</section>
+            <!-- Sustainable Engineering card -->
+            <div class="topic-card card" onclick="openAccordion('engineering')">
+              <div class="topic-media" style="background-image:url('https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1200&q=60')"></div>
+              <div class="topic-body">
+                <h3>Sustainable Engineering</h3>
+                <p>Triple bottom line, life-cycle analysis, metrics like carbon & water footprints.</p>
+              </div>
+            </div>
 
-<section class="card" style="margin-top:12px">
-<h2>4. Landscape & Urban Ecology</h2>
-<ul>
-<li>Landscape ecology studies spatial patterns and how they affect ecological processes.</li>
-<li>Urbanization causes habitat loss, heat islands, pollution.</li>
-<li>Sustainable urban planning: green roofs, parks, rainwater harvesting, public transport.</li>
-</ul>
-</section>
-</div>
+            <!-- Ecosystems & Biodiversity -->
+            <div class="topic-card card" onclick="openAccordion('ecosystems')">
+              <div class="topic-media" style="background-image:url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=60')"></div>
+              <div class="topic-body">
+                <h3>Ecosystems & Biodiversity</h3>
+                <p>Basics, functions, human impact, conservation, Kerala ecosystems (Western Ghats, mangroves).</p>
+              </div>
+            </div>
 
-<!-- Right column -->
-<aside>
-<div class="card">
-<h2>Quick True/False Quiz</h2>
-<div id="tf-area">
-<div class="small">Click the answer you think is correct.</div>
-<div style="margin-top:8px">
-<div><b>1.</b> Anthropocentrism = humans are center</div>
-<button class="quiz-btn" onclick="tfAnswer(1,true,this)">True</button>
-<button class="quiz-btn" onclick="tfAnswer(1,false,this)">False</button>
-</div>
-<div style="margin-top:8px">
-<div><b>2.</b> Solar energy is non-renewable</div>
-<button class="quiz-btn" onclick="tfAnswer(2,true,this)">True</button>
-<button class="quiz-btn" onclick="tfAnswer(2,false,this)">False</button>
-</div>
-<div style="margin-top:8px">
-<div><b>3.</b> Mangroves protect coastlines</div>
-<button class="quiz-btn" onclick="tfAnswer(3,true,this)">True</button>
-<button class="quiz-btn" onclick="tfAnswer(3,false,this)">False</button>
-</div>
-<div class="result" id="tf-result"></div>
-</div>
-<div class="small-note">Tip: After each answer, explain the why in 1 sentence.</div>
-</div>
+            <!-- Landscape & Urban Ecology -->
+            <div class="topic-card card" onclick="openAccordion('urban')">
+              <div class="topic-media" style="background-image:url('https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=60')"></div>
+              <div class="topic-body">
+                <h3>Landscape & Urban Ecology</h3>
+                <p>Landscape principles, urban impacts, green infrastructure and sustainable city planning.</p>
+              </div>
+            </div>
+          </div>
 
-<div class="card" style="margin-top:12px">
-<h2>Jumbled Words Puzzle</h2>
-<div class="small">Type the correct word and press Check.</div>
+          <!-- Accordions with detailed content -->
+          <div class="accordion">
+            <div class="acc-item" id="ethics">
+              <div class="acc-title" onclick="toggleAcc('ethics')">
+                <h4>Environmental Ethics — Definition & Importance</h4>
+                <div>+</div>
+              </div>
+              <div class="acc-body">
+                <p><strong>Definition:</strong> Environmental ethics studies the moral relationship between humans and the natural environment — how we should treat animals, plants, ecosystems and future generations.</p>
+                <p><strong>Importance:</strong> Provides frameworks to decide what to protect and why; shapes policy and personal behaviour (conservation laws, protected areas).</p>
+                <p><strong>Historical development:</strong> Ideas in ancient cultures; modern environmental ethics grew in the 20th century—Rachel Carson’s "Silent Spring", Aldo Leopold’s land ethic, and later global environmental movements.</p>
+                <div style="margin-top:8px">
+                  <strong>Key Theories (click to expand):</strong>
+                  <div style="margin-top:6px">
+                    <button class="pill" onclick="showSub('anth')">Anthropocentrism</button>
+                    <button class="pill" onclick="showSub('bio')">Biocentrism</button>
+                    <button class="pill" onclick="showSub('eco')">Ecocentrism</button>
+                  </div>
+                  <div id="sub-ethics" style="margin-top:10px"></div>
+                </div>
+              </div>
+            </div>
 
-<div style="margin-top:8px">
-<div>1. <b>RTEE</b></div>
-<input id="j1" class="puzzle-input" placeholder="Type answer e.g. TREE">
-<button class="btn" onclick="checkJ(1)">Check</button>
-<div id="j1-res" class="small-note"></div>
-</div>
+            <div class="acc-item" id="engineering">
+              <div class="acc-title" onclick="toggleAcc('engineering')">
+                <h4>Sustainable Engineering — Principles & Scope</h4>
+                <div>+</div>
+              </div>
+              <div class="acc-body">
+                <p><strong>Definition:</strong> Engineering approaches that minimize environmental harm while meeting human needs now and for the future.</p>
+                <p><strong>Triple Bottom Line:</strong> Economic (profit), Social (people), Environmental (planet) — successful solutions balance all three.</p>
+                <p><strong>Life Cycle Analysis (LCA):</strong> Evaluate product impacts from raw materials → manufacturing → use → disposal/recycling.</p>
+                <p><strong>Metrics:</strong> Carbon footprint, water footprint, embodied energy, material circularity.</p>
+                <div style="margin-top:8px">
+                  <strong>Practical examples:</strong>
+                  <ul>
+                    <li>Designing low-energy buildings with rainwater harvesting and passive cooling.</li>
+                    <li>Choosing recycled materials & designing for disassembly.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
 
-<div style="margin-top:8px">
-<div>2. <b>WATRE</b></div>
-<input id="j2" class="puzzle-input" placeholder="Type answer e.g. WATER">
-<button class="btn" onclick="checkJ(2)">Check</button>
-<div id="j2-res" class="small-note"></div>
-</div>
+            <div class="acc-item" id="ecosystems">
+              <div class="acc-title" onclick="toggleAcc('ecosystems')">
+                <h4>Ecosystems & Biodiversity — Basics & Significance</h4>
+                <div>+</div>
+              </div>
+              <div class="acc-body">
+                <p><strong>Basics:</strong> Ecosystems are networks of organisms interacting with physical environment—energy flow, nutrient cycles, food webs.</p>
+                <p><strong>Importance of biodiversity:</strong> Food, medicine, ecosystem resilience, cultural values. More species = healthier ecosystems.</p>
+                <p><strong>Human impacts:</strong> Habitat loss, pollution, invasive species, climate change causing biodiversity decline.</p>
+                <p><strong>Kerala & India ecosystems:</strong> Western Ghats (biodiversity hotspot), backwaters, mangroves, coastal ecosystems, tropical rainforests — all crucial for water, soil stability and livelihoods.</p>
+              </div>
+            </div>
 
-<div style="margin-top:8px">
-<div>3. <b>RIGET</b></div>
-<input id="j3" class="puzzle-input" placeholder="Type answer e.g. TIGER">
-<button class="btn" onclick="checkJ(3)">Check</button>
-<div id="j3-res" class="small-note"></div>
-</div>
+            <div class="acc-item" id="urban">
+              <div class="acc-title" onclick="toggleAcc('urban')">
+                <h4>Landscape & Urban Ecology — Planning & Green Infrastructure</h4>
+                <div>+</div>
+              </div>
+              <div class="acc-body">
+                <p><strong>Principles:</strong> Understand spatial patterns and their ecological functions — connectivity, fragmentation, corridor design.</p>
+                <p><strong>Urbanization impacts:</strong> Heat islands, habitat fragmentation, pollution, stormwater runoff.</p>
+                <p><strong>Sustainable planning:</strong> Green roofs, urban forests, permeable pavements, public transport, mixed-use development reduce energy and emissions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<div style="margin-top:10px">
-<button class="btn" onclick="revealAll()">Reveal all answers</button>
-</div>
-</div>
+        <!-- Games & Activities card -->
+        <div class="card" style="margin-top:14px">
+          <h3 style="margin:0 0 8px 0">🎮 Games & Activities</h3>
+          <p class="small">Use these quick interactive tools to learn and test key ideas.</p>
 
-<div class="card" style="margin-top:12px">
-<h2>Presenting Tips</h2>
-<div class="present-tips small">
-1. Member 1: Read intro (30 sec).<br>
-2. Member 2: Run True/False quiz (~2 min).<br>
-3. Member 3: Explain answers briefly.<br>
-4. Member 4: Run jumbled words (~2–3 min).<br>
-5. Member 5: Ask 2 quick shout questions & close.
-</div>
-</div>
-</aside>
-</div>
+          <div class="games-row" style="margin-top:12px">
+            <!-- True / False -->
+            <div class="game">
+              <h4 style="margin:0">True / False Quiz</h4>
+              <div class="small" style="margin-top:8px">Click an answer — explanation appears below.</div>
 
-<footer>
-<div class="small">Tip: Save this file and open in your browser tomorrow. No internet required.</div>
-</footer>
+              <div id="tf-qs" style="margin-top:10px">
+                <div style="margin-top:8px"><strong>1.</strong> Anthropocentrism = humans are central</div>
+                <div class="q-row">
+                  <button class="pill true" onclick="tfAnswer(1,true,this)">True</button>
+                  <button class="pill false" onclick="tfAnswer(1,false,this)">False</button>
+                </div>
 
-</div>
+                <div style="margin-top:8px"><strong>2.</strong> Solar energy is non-renewable</div>
+                <div class="q-row">
+                  <button class="pill true" onclick="tfAnswer(2,true,this)">True</button>
+                  <button class="pill false" onclick="tfAnswer(2,false,this)">False</button>
+                </div>
+
+                <div style="margin-top:8px"><strong>3.</strong> Mangroves protect coastlines</div>
+                <div class="q-row">
+                  <button class="pill true" onclick="tfAnswer(3,true,this)">True</button>
+                  <button class="pill false" onclick="tfAnswer(3,false,this)">False</button>
+                </div>
+
+                <div id="tf-res" class="result"></div>
+              </div>
+            </div>
+
+            <!-- Jumbled words -->
+            <div class="game">
+              <h4 style="margin:0">Jumbled Words</h4>
+              <div class="small" style="margin-top:8px">Unscramble & press Check.</div>
+
+              <div style="margin-top:10px">
+                <div><strong>1.</strong> RTEE</div>
+                <input id="j1" class="puzzle" placeholder="Type answer (e.g. TREE)">
+                <button class="btn small" onclick="checkJ(1)">Check</button>
+                <div id="j1res" class="small"></div>
+              </div>
+
+              <div style="margin-top:8px">
+                <div><strong>2.</strong> RIGET</div>
+                <input id="j2" class="puzzle" placeholder="Type answer (e.g. TIGER)">
+                <button class="btn small" onclick="checkJ(2)">Check</button>
+                <div id="j2res" class="small"></div>
+              </div>
+
+              <div style="margin-top:8px">
+                <div><strong>3.</strong> GONVOERM</div>
+                <input id="j3" class="puzzle" placeholder="Type answer (e.g. MANGROVE)">
+                <button class="btn small" onclick="checkJ(3)">Check</button>
+                <div id="j3res" class="small"></div>
+              </div>
+
+              <div style="margin-top:10px">
+                <button class="btn small" onclick="revealJ()">Reveal All</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Memory Game -->
+          <div style="margin-top:12px">
+            <h4 style="margin:0">Memory Match (icons)</h4>
+            <div class="small">Flip two cards — find pairs (images represent topics).</div>
+            <div id="memory" style="margin-top:10px">
+              <div class="memory-grid" id="memgrid"></div>
+              <div style="margin-top:8px">
+                <button class="btn small" onclick="startMemory()">Start / Reset</button>
+                <span id="mem-status" style="margin-left:10px" class="small"></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Presentation tips & cheat sheet -->
+        <div class="card" style="margin-top:14px">
+          <h3 style="margin:0">Presentation Tips & Cheat Sheet</h3>
+          <div class="present-tips">
+            <strong>Quick plan (10-15 min):</strong>
+            <ol style="margin:8px 0 0 18px">
+              <li>Member 1: Intro & open site (30 sec)</li>
+              <li>Member 2: Run True/False (2-3 min)</li>
+              <li>Member 3: Explain answers (short)</li>
+              <li>Member 4: Run Jumble & Memory (4-6 min)</li>
+              <li>Member 5: Quick Qs to class & Closing (1 min)</li>
+            </ol>
+            <div style="margin-top:8px" class="small">Cheat lines: copy these short lines to present quickly.</div>
+            <pre style="background:#f7f9fb;padding:8px;border-radius:6px;margin-top:8px">Environmental Ethics — "It studies how humans should treat nature. Theories: Anthropocentrism (humans-first), Biocentrism (all life matters), Ecocentrism (ecosystem-centered)."
+
+Sustainable Engineering — "Design for economy, society & environment. Use LCA and measure carbon & water footprints."
+
+Ecosystems & Biodiversity — "Ecosystems provide services: food, water, soil stability. Kerala: Western Ghats, mangroves, backwaters are very important."
+
+Urban Ecology — "Green roofs, parks, and public transport reduce heat islands and pollution."</pre>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- RIGHT column -->
+      <aside>
+        <div class="card">
+          <h3 style="margin:0">Quick Navigation</h3>
+          <p class="small">Jump to sections and open details</p>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+            <button class="btn" onclick="openAccordion('ethics')">Environmental Ethics</button>
+            <button class="btn" onclick="openAccordion('engineering')">Sustainable Engineering</button>
+            <button class="btn" onclick="openAccordion('ecosystems')">Ecosystems & Biodiversity</button>
+            <button class="btn" onclick="openAccordion('urban')">Landscape & Urban Ecology</button>
+            <button class="btn" onclick="scrollToSection('memory')">Games</button>
+          </div>
+
+          <div style="margin-top:12px">
+            <h4 style="margin:0">Image Gallery</h4>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px">
+              <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=400&q=60" style="width:100%;border-radius:8px">
+              <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=400&q=60" style="width:100%;border-radius:8px">
+              <img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=400&q=60" style="width:100%;border-radius:8px">
+              <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=400&q=60" style="width:100%;border-radius:8px">
+            </div>
+            <div class="image-credit">Images: Unsplash (free to use)</div>
+          </div>
+
+          <div style="margin-top:12px">
+            <h4 style="margin:0">Presentation Tips</h4>
+            <div class="small" style="margin-top:8px">
+              - Practice each role once (3–4 min).<br>
+              - Use site as visual aid and run games live.<br>
+              - Keep explanations short (1 line per item).
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h4 style="margin:0">Extra Resources</h4>
+          <div class="small" style="margin-top:8px">
+            - <a href="https://en.wikipedia.org/wiki/Environmental_ethics" target="_blank">Environmental ethics (Wiki)</a><br>
+            - <a href="https://en.wikipedia.org/wiki/Sustainable_engineering" target="_blank">Sustainable engineering (Wiki)</a>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+    <footer>
+      <div>Made by <strong>Amal</strong> — Module 2 interactive demo • Save & present in class</div>
+    </footer>
+  </div>
 
 <script>
-// True/False answers
-const tfCorrect = {1:true,2:false,3:true};
-const answered = {};
-function tfAnswer(q,val,btn){
-  if(answered[q]) return;
-  answered[q]=true;
-  const correct = tfCorrect[q];
-  if(val === correct){ btn.classList.add('correct'); document.getElementById('tf-result').textContent='Correct!'; }
-  else { btn.classList.add('wrong'); document.getElementById('tf-result').textContent='Wrong!'; }
+/* ---------- Accordion logic ---------- */
+function toggleAcc(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const body = el.querySelector('.acc-body');
+  const open = body.style.display === 'block';
+  // close all
+  document.querySelectorAll('.acc-body').forEach(b=>b.style.display='none');
+  if(!open) body.style.display='block';
+}
+function openAccordion(id){
+  toggleAcc(id);
+  // scroll into view
+  setTimeout(()=> {
+    document.getElementById(id).scrollIntoView({behavior:'smooth', block:'center'});
+  },120)
 }
 
-// Jumbled words answers
-const janswers = {1:'TREE',2:'WATER',3:'TIGER'};
-function checkJ(n){
-  const el=document.getElementById('j'+n);
-  const res=document.getElementById('j'+n+'-res');
-  if(!el) return;
-  const val=(el.value||'').trim().toUpperCase();
-  if(!val){ res.textContent='Type an answer'; return; }
-  if(val===janswers[n]){ res.textContent='Correct!'; }
-  else { res.textContent='Not exactly — try again or Reveal.'; }
+/* ---------- Subtopic show ---------- */
+function showSub(key){
+  const target = document.getElementById('sub-ethics');
+  if(!target) return;
+  let html='';
+  if(key==='anth'){
+    html = '<strong>Anthropocentrism:</strong> Humans are the primary moral concern; nature is valued mainly for human benefit.';
+  } else if(key==='bio'){
+    html = '<strong>Biocentrism:</strong> All living organisms have intrinsic value and deserve moral consideration.';
+  } else {
+    html = '<strong>Ecocentrism:</strong> Ecosystems, species and ecological processes have value beyond individual organisms.';
+  }
+  target.innerHTML = '<div style="padding:10px;border-radius:8px;background:#f6fbf9;border:1px solid #e6f8ef">'+html+'</div>';
 }
-function revealAll(){
-  for(const k in janswers){
-    const el=document.getElementById('j'+k);
-    const res=document.getElementById('j'+k+'-res');
-    if(el) el.value=janswers[k];
-    if(res) res.textContent='Answer revealed';
+
+/* ---------- True/False Quiz ---------- */
+const tfCorrect = {1:true, 2:false, 3:true};
+const tfExpl = {
+  1: 'Correct. Anthropocentrism prioritizes humans when making moral decisions.',
+  2: 'False. Solar energy is renewable — it does not run out like fossil fuels.',
+  3: 'Correct. Mangroves protect coasts by reducing erosion and buffering storms.'
+};
+function tfAnswer(q,val,btn){
+  const res = document.getElementById('tf-res');
+  if(tfCorrect[q] === val){
+    res.innerHTML = '<span style="color:green">Correct! — '+tfExpl[q]+'</span>';
+    btn.style.transform='scale(0.98)';
+    btn.style.boxShadow='0 6px 16px rgba(34,197,94,0.12)';
+  } else {
+    res.innerHTML = '<span style="color:#c53030">Not correct — '+tfExpl[q]+'</span>';
+    btn.style.transform='scale(0.98)';
+    btn.style.boxShadow='0 6px 16px rgba(240,100,100,0.08)';
+  }
+  // small reset after
+  setTimeout(()=>{ btn.style.transform=''; btn.style.boxShadow=''; },300);
+}
+
+/* ---------- Jumbled words ---------- */
+const jAns = {1:'TREE',2:'TIGER',3:'MANGROVE'};
+function checkJ(n){
+  const v = (document.getElementById('j'+n).value||'').trim().toUpperCase();
+  const res = document.getElementById('j'+n+'res');
+  if(!v){ res.textContent='Type an answer'; return; }
+  if(v===jAns[n]) res.textContent = 'Correct ✅';
+  else res.textContent = 'Try again or press Reveal';
+}
+function revealJ(){
+  for(const k in jAns){
+    document.getElementById('j'+k).value = jAns[k];
+    document.getElementById('j'+k+'res').textContent = 'Revealed';
   }
 }
+
+/* ---------- Memory match game ---------- */
+let memCards = [];
+let memFirst=null, memSecond=null, memLock=false, memMatched=0;
+const icons = [
+  {id:'tree', label:'🌳'},
+  {id:'water', label:'💧'},
+  {id:'tiger', label:'🐯'},
+  {id:'solar', label:'☀️'},
+  {id:'bee', label:'🐝'},
+  {id:'recycle', label:'♻️'}
+];
+function startMemory(){
+  memMatched=0; memLock=false; memFirst=null; memSecond=null;
+  const pairs = icons.concat(icons).slice(0,12); // 6 pairs
+  shuffle(pairs);
+  memCards = pairs;
+  const grid = document.getElementById('memgrid');
+  grid.innerHTML='';
+  pairs.forEach((it, idx) => {
+    const el = document.createElement('div');
+    el.className='card-mem';
+    el.dataset.index = idx;
+    el.innerHTML = '<span class="mem-face">?</span>';
+    el.onclick = ()=> flipCard(idx, el);
+    grid.appendChild(el);
+  });
+  document.getElementById('mem-status').textContent = 'Find pairs!';
+}
+function flipCard(idx, el){
+  if(memLock) return;
+  if(el.classList.contains('flipped')) return;
+  el.classList.add('flipped');
+  el.textContent = memCards[idx].label;
+  if(!memFirst){ memFirst = {idx, el}; return; }
+  memSecond = {idx, el};
+  memLock = true;
+  setTimeout(()=>{
+    if(memCards[memFirst.idx].id === memCards[memSecond.idx].id){
+      // matched
+      memFirst.el.style.visibility='hidden';
+      memSecond.el.style.visibility='hidden';
+      memMatched += 1;
+      document.getElementById('mem-status').textContent = 'Matches: '+memMatched;
+      if(memMatched === icons.length){
+        document.getElementById('mem-status').textContent = 'All matched — well done!';
+      }
+    } else {
+      // flip back
+      memFirst.el.classList.remove('flipped'); memSecond.el.classList.remove('flipped');
+      memFirst.el.textContent = '?'; memSecond.el.textContent = '?';
+    }
+    memFirst=null; memSecond=null; memLock=false;
+  },700);
+}
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]] } }
+
+/* ---------- helpers ---------- */
+function scrollToSection(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function toggleTheme(){
+  alert('Preview toggle — this demo uses purple→blue theme. You can customize via CSS!');
+}
+
+/* initialize small UI */
+document.addEventListener('DOMContentLoaded', ()=> {
+  // pre-open ethics accordion
+  toggleAcc('ethics');
+});
 </script>
 </body>
 </html>
